@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 //nel controller abbiamo le funzioni per gestire automaticamente le rotte (index, create ...)
 //praticamente il controller gestira' tutte le operazioni CRUD
