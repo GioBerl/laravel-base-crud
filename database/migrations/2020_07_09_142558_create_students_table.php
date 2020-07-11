@@ -17,7 +17,8 @@ class CreateStudentsTable extends Migration
             $table->id();
             $table->string('firstname', 100);	
             $table->string('lastname', 100);	
-            $table->integer('sr_num')->unique();    //?crea un indice, va bene?
+            $table->integer('sr_num')->unique();    //?crea un indice, va bene? 
+            //!Risp: meglio usare anche la validazione per controllo
             $table->string('email')->unique();      //?crea un indice, va bene?
             $table->timestamps();
         });

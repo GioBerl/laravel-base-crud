@@ -11,7 +11,7 @@
                 <a href="{{route('students.create')}}" class="btn btn-primary mt-3">Nuovo Studente</a>
             </div>
 
-            <table class="table table-bordered table-striped mt-5 mb-3">
+            <table class="table table-bordered table-striped mt-5 mb-3 text-center">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">#</th>
@@ -31,9 +31,19 @@
                         <td>{{$student->sr_num}}</td>
                         <td>{{$student->email}}</td>
                         <td>
-                            <a href="{{route('students.show', ['student'=>$student->id])}}" class="btn btn-info">
+                            <a href="{{route('students.show', ['student'=>$student->id])}}" class="btn btn-sm btn-info">
                                 Dettagli
                             </a>
+                            <a href="{{route('students.edit', ['student'=>$student->id])}}"
+                                class="btn btn-sm btn-warning">
+                                Modifica
+                            </a>
+                            <form action="{{route('students.destroy', ['student'=>$student->id])}}" method="post"
+                                class="d-inline-block">
+                                @csrf
+                                @method('DELETE')
+                                <input type="submit" class="btn btn-sm btn-danger" value="Elimina">
+                            </form>
                         </td>
                     </tr>
                     @endforeach

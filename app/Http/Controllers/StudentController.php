@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Student;
+use Illuminate\Validation\Rule;
 
 class StudentController extends Controller
 {
@@ -44,6 +45,12 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'firstname' => 'required|string|max:100',
+            'lastname' => 'required|string|max:100',
+            'sr_num' => 'required|unique:students|numeric|digits:5',
+            'email' => 'required|string|unique:students|email',
+        ]);
         $data = $request->all();
         $new_student = new Student();
         $new_student->fill($data);
@@ -69,9 +76,9 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Student $student)
     {
-        //
+        return view('students.edit',compact('student'));
     }
 
     /**
@@ -81,9 +88,29 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Student $student)
     {
-        //
+        $request->validate([
+            'firstname' => 'required|string|max:100',
+            'lastname' => 'required|string|max:100',
+            // 'sr_num' => 'required|unique:students|numeric|digits:5',
+            // 'email' => 'required|string|unique:students|email',
+            'sr_num' => [
+                'required',
+                'numeric',
+                'digits:5',
+                Rule::unique('students')->ignore($student->id), //?da chiedere a Sofia
+            ],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                Rule::unique('students')->ignore($student->id), //?da chiedere a Sofia
+            ],
+        ]);
+        $data = $request->all();
+        $student->update($data);
+        return redirect()->route('students.index');
     }
 
     /**
@@ -92,8 +119,9 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Student $student)
     {
-        //
+        $student->delete();
+        return redirect()->route('students.index');
     }
 }
