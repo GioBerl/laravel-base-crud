@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'StudentController@prova')->name('home');
+Route::get('/', 'StudentController@info')->name('home');
 
 //nel controller abbiamo le funzioni per gestire automaticamente le rotte (index, create ...)
 //praticamente il controller gestira' tutte le operazioni CRUD

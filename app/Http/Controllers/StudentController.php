@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Student;
 use Illuminate\Validation\Rule;
+use App\Rules\OnlyTwoSex;
 
 class StudentController extends Controller
 {
@@ -25,16 +26,18 @@ class StudentController extends Controller
         //nella view index.blade.php mi trovo la collection $students da poter ciclare
     }
 
-    public function prova()
+    public function info()
     {
-        //la rotta sara' localhost:8000/students
         $students = Student::all(); //!mi ritorna una collection
+        $maleStudents = Student::where('sex', 'M')->get(); //operatore ==
+        $femaleStudents = Student::where('sex', 'F')->get(); //operatore ==
+        // dd($maleStudents);
         // dd($students);
         //!occhio al percorso della view
-        return view('welcome', compact('students'));
+        return view('welcome', compact('students', 'maleStudents', 'femaleStudents'));
         //come secondo parametro in alternativa avrei potuto passare un array
         //['students'=>$students]
-        //nella view index.blade.php mi trovo la collection $students da poter ciclare
+        //nella view welcome.blade.php mi trovo la collection $students da poter ciclare
     }
 
     /**
@@ -60,7 +63,7 @@ class StudentController extends Controller
         $request->validate([
             'firstname' => 'required|string|max:100',
             'lastname' => 'required|string|max:100',
-            'sex' => 'required|string|max:1',
+            'sex' => ['required','string','max:1', new OnlyTwoSex],
             'sr_num' => 'required|unique:students|numeric|digits:5',
             'email' => 'required|string|unique:students|email',
         ]);
@@ -106,7 +109,7 @@ class StudentController extends Controller
         $request->validate([
             'firstname' => 'required|string|max:100',
             'lastname' => 'required|string|max:100',
-            'sex' => 'required|string|max:1',
+            'sex' => ['required','string','max:1', new OnlyTwoSex],
             // 'sr_num' => 'required|unique:students|numeric|digits:5',
             // 'email' => 'required|string|unique:students|email',
             'sr_num' => [

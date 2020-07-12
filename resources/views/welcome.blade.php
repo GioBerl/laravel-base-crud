@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('page-title', 'Studente')
+@section('page-title', 'Homepage')
 
 @section('content')
 <div class="container">
@@ -12,7 +12,8 @@
             </p>
             <p>
                 info generali Studenti classe X : <br>
-                numero studenti: {{count($students)}}
+                numero studenti totali: {{count($students)}} <br>
+                di cui maschi: {{count($maleStudents)}} e femmine: {{count($femaleStudents)}}
             </p>
         </div>
     </div>
