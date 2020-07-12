@@ -17,6 +17,7 @@
                         <th scope="col">#</th>
                         <th scope="col">firstname</th>
                         <th scope="col">lastname</th>
+                        <th scope="col">sex</th>
                         <th scope="col">sr_num</th>
                         <th scope="col">email</th>
                         <th scope="col">actions</th>
@@ -28,6 +29,7 @@
                         <th scope="row">{{$student->id}}</th>
                         <td>{{$student->firstname}}</td>
                         <td>{{$student->lastname}}</td>
+                        <td>{{$student->sex}}</td>
                         <td>{{$student->sr_num}}</td>
                         <td>{{$student->email}}</td>
                         <td>

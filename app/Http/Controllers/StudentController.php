@@ -16,10 +16,22 @@ class StudentController extends Controller
     public function index()
     {
         //la rotta sara' localhost:8000/students
-        $students = Student::all();
+        $students = Student::all(); //!mi ritorna una collection
         // dd($students);
         //!occhio al percorso della view
         return view('students.index', compact('students'));
+        //come secondo parametro in alternativa avrei potuto passare un array
+        //['students'=>$students]
+        //nella view index.blade.php mi trovo la collection $students da poter ciclare
+    }
+
+    public function prova()
+    {
+        //la rotta sara' localhost:8000/students
+        $students = Student::all(); //!mi ritorna una collection
+        // dd($students);
+        //!occhio al percorso della view
+        return view('welcome', compact('students'));
         //come secondo parametro in alternativa avrei potuto passare un array
         //['students'=>$students]
         //nella view index.blade.php mi trovo la collection $students da poter ciclare
@@ -48,6 +60,7 @@ class StudentController extends Controller
         $request->validate([
             'firstname' => 'required|string|max:100',
             'lastname' => 'required|string|max:100',
+            'sex' => 'required|string|max:1',
             'sr_num' => 'required|unique:students|numeric|digits:5',
             'email' => 'required|string|unique:students|email',
         ]);
@@ -93,6 +106,7 @@ class StudentController extends Controller
         $request->validate([
             'firstname' => 'required|string|max:100',
             'lastname' => 'required|string|max:100',
+            'sex' => 'required|string|max:1',
             // 'sr_num' => 'required|unique:students|numeric|digits:5',
             // 'email' => 'required|string|unique:students|email',
             'sr_num' => [

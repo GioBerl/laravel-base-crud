@@ -27,6 +27,14 @@
                     @enderror
                 </div>
                 <div class="form-group">
+                    <label for="sex">Sex</label>
+                    <input type="text" name="sex" class="form-control" id="sex" placeholder="Inserisci Sesso"
+                        value="{{ old('sex') }}">
+                    @error('sex')
+                    <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+                <div class="form-group">
                     <label for="sr_num">Serial Number</label>
                     <input type="number" name="sr_num" class="form-control" id="sr_num"
                         placeholder="Inserisci Matricola" value="{{ old('sr_num') }}">

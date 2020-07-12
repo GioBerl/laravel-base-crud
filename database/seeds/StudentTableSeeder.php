@@ -18,6 +18,8 @@ class StudentTableSeeder extends Seeder
             $new_student = new Student();
             $new_student->firstname = $faker->word;
             $new_student->lastname = $faker->word;
+            $new_student->sex = $faker->randomElement(['M','F']); 
+
             $new_student->sr_num = $faker->randomNumber(5, true);
             $new_student->email = $faker->email;
             $new_student->save();
